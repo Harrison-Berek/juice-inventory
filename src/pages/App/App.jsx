@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import AuthPage from '../AuthPage/AuthPage';
-import NewOrderPage from '../NewOrderPage/NewOrderPage';
-import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
+import Items from '../Items/Items';
+import Categories from '../Categories/Categories';
+import Venders from '../Venders/Venders';
 import NavBar from '../../components/NavBar/NavBar';
 import './App.css';
 
@@ -12,21 +13,25 @@ export default function App() {
   
   return (
     <main className="App">
-      { user ? 
+      { 
+      // user ? 
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
-            <Route path="/orders/new">
-              <NewOrderPage />
+            <Route path="/items">
+              <Items />
             </Route>
-            <Route path="/orders">
-              <OrderHistoryPage />
+            <Route path="/categories">
+              <Categories />
             </Route>
-            <Redirect to="/orders" />
+            <Route path="/venders">
+              <Venders />
+            </Route>
+            <Redirect to="/items" />
           </Switch>
         </>
-        :
-        <AuthPage setUser={setUser} />
+        // :
+        // <AuthPage setUser={setUser} />
       }
     </main>
   );
