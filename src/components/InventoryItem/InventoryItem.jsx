@@ -7,7 +7,6 @@ export default function InventoryItem({ item }) {
             <td>{item.cost}</td>
             <td>{((1 - item.cost/item.price)*100).toFixed(1)}%</td>
             <td>{item.sku}</td>
-            <td>Category</td>
             <td><button>Edit/Delete</button></td>
         </>
     )

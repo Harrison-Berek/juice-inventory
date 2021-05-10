@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
+import * as itemsAPI from '../../utilities/items-api';
 import AuthPage from '../AuthPage/AuthPage';
 import Items from '../Items/Items';
 import Categories from '../Categories/Categories';
@@ -11,6 +12,15 @@ import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [allItems, setAllItems] = useState([])
+
+  useEffect(function() {
+    async function getItems() {
+      const items = await itemsAPI.getAll();
+      setAllItems(items);
+    };
+    getItems();
+  }, []);
   
   return (
     <main className="App">
@@ -20,10 +30,10 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Switch>
             <Route path="/items/itemform">
-              <ItemForm />
+              <ItemForm allItems={allItems} setAllItems={setAllItems}/>
             </Route>
             <Route path="/items">
-              <Items />
+              <Items allItems={allItems}/>
             </Route>
             <Route path="/categories">
               <Categories />

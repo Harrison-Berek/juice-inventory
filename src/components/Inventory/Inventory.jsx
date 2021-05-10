@@ -14,7 +14,6 @@ export default function Inventroy({ allItems }) {
                     <th>Cost</th>
                     <th>Margin</th>
                     <th>SKU</th>
-                    <th>Category</th>
                     <th>Edit/Delete</th>
                 </tr>
             </thead>
