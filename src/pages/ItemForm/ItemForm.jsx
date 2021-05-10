@@ -41,7 +41,7 @@ export  default function ItemForm({ allItems, setAllItems, activeItem }) {
 
     return (
         <>
-            <h1>Add an Item</h1>
+            <h1>{activeItem ? 'Edit Item' : 'Add an Item'}</h1>
             <form onSubmit={handleAddItem} >
                 <label>Name:</label>
                 <input name='name' value={formData.name} onChange={handleChange} />

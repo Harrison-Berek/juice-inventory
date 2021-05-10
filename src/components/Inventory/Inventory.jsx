@@ -22,7 +22,7 @@ export default function Inventroy({ allItems, setActiveItem }) {
                 <tr><InventoryItem item={item} key={idx} setActiveItem={setActiveItem} /></tr>)}
             </tbody>
         </table>
-        <Link to='/items/itemform'><button>Add Item</button></Link>
+        <Link to='/items/itemform'><button onClick={() => setActiveItem(null)}>Add Item</button></Link>
     </div>
     )
 }
