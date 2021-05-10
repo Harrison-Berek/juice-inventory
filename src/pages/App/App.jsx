@@ -32,7 +32,7 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Switch>
             <Route path="/items/itemform">
-              <ItemForm allItems={allItems} setAllItems={setAllItems} activeItem={activeItem}/>
+              <ItemForm allItems={allItems} setAllItems={setAllItems} activeItem={activeItem} setActiveItem={setActiveItem} />
             </Route>
             <Route path="/items">
               <Items allItems={allItems} setActiveItem={setActiveItem} />
