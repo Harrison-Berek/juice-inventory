@@ -6,6 +6,7 @@ import Items from '../Items/Items';
 import Categories from '../Categories/Categories';
 import Venders from '../Venders/Venders';
 import NavBar from '../../components/NavBar/NavBar';
+import ItemForm from '../ItemForm/ItemForm';
 import './App.css';
 
 export default function App() {
@@ -18,6 +19,9 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
+            {/* <Route path="/items/itemform">
+              <ItemForm />
+            </Route> */}
             <Route path="/items">
               <Items />
             </Route>
