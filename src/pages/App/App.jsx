@@ -25,7 +25,7 @@ export default function App() {
   return (
     <main className="App">
       { 
-      // user ? 
+      user ? 
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
@@ -44,8 +44,8 @@ export default function App() {
             <Redirect to="/items" />
           </Switch>
         </>
-        // :
-        // <AuthPage setUser={setUser} />
+        :
+        <AuthPage setUser={setUser} />
       }
     </main>
   );

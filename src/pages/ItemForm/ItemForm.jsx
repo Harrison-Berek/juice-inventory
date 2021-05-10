@@ -43,12 +43,14 @@ export  default function ItemForm({ allItems, setAllItems }) {
                 <input name='name' value={formData.name} onChange={handleChange} />
                 <label>Description:</label>
                 <input name='description' value={formData.description} onChange={handleChange} />
-                <label>Price:</label>
-                <input name='price' value={formData.price} onChange={handleChange} />
                 <label>Cost:</label>
                 <input name='cost' value={formData.cost} onChange={handleChange} />
+                <label>Price:</label>
+                <input name='price' value={formData.price} onChange={handleChange} />
                 <label>Margin:</label>
-                Margin
+                {formData.price ? <span>{((1 - formData.cost/formData.price)*100).toFixed(1)}% </span>
+                :
+                <span></span>}
                 <label>SKU:</label>
                 <input name='sku' value={formData.sku} onChange={handleChange} />
                 <button type='submit'>Add Item</button>
