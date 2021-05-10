@@ -19,9 +19,9 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
-            {/* <Route path="/items/itemform">
+            <Route path="/items/itemform">
               <ItemForm />
-            </Route> */}
+            </Route>
             <Route path="/items">
               <Items />
             </Route>

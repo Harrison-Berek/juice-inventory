@@ -1,13 +1,7 @@
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import InventoryItem from '../InventoryItem/InventoryItem';
 
 export default function Inventroy({ allItems }) {
-    const history = useHistory();
-
-    function handleAddItem() {
-        console.log('clicked');
-        history.push('/itemform');
-    }
 
     return (
     <div>
@@ -29,7 +23,7 @@ export default function Inventroy({ allItems }) {
                 <tr><InventoryItem item={item} key={idx}/></tr>)}
             </tbody>
         </table>
-        <button onClick={handleAddItem}>Add Item</button>
+        <Link to='/items/itemform'><button>Add Item</button></Link>
     </div>
     )
 }
