@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import * as itemsAPI from '../../utilities/items-api';
 
  
 export  default function ItemForm({ allItems, setAllItems }) {
@@ -10,8 +11,9 @@ export  default function ItemForm({ allItems, setAllItems }) {
         sku: '',
     });
     
-    function addItem(item){
-        setAllItems([...allItems, item])
+    async function addItem(itemData){
+        const item = await itemsAPI.add(itemData);
+        setAllItems([...allItems, item]);
     }
 
     function handleChange(evt) {

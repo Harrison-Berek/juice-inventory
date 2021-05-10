@@ -10,6 +10,6 @@ export function getById(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
 
-// export function itemForm() {
-//     return sendRequest(`${BASE_URL}/itemform`)
-// }
+export function add(item) {
+    return sendRequest(BASE_URL, 'POST', item);
+}
