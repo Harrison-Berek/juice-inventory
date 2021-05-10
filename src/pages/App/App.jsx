@@ -13,6 +13,8 @@ import './App.css';
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [allItems, setAllItems] = useState([])
+  const [activeItem, setActiveItem] = useState(null)
+
 
   useEffect(function() {
     async function getItems() {
@@ -30,10 +32,10 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Switch>
             <Route path="/items/itemform">
-              <ItemForm allItems={allItems} setAllItems={setAllItems}/>
+              <ItemForm allItems={allItems} setAllItems={setAllItems} activeItem={activeItem}/>
             </Route>
             <Route path="/items">
-              <Items allItems={allItems}/>
+              <Items allItems={allItems} setActiveItem={setActiveItem} />
             </Route>
             <Route path="/categories">
               <Categories />

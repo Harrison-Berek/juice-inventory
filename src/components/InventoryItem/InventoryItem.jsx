@@ -1,4 +1,7 @@
-export default function InventoryItem({ item }) {
+import { Link } from 'react-router-dom';
+
+export default function InventoryItem({ item, setActiveItem }) {
+
     return (
         <>
             <td>{item.name}</td>
@@ -7,7 +10,7 @@ export default function InventoryItem({ item }) {
             <td>{item.cost}</td>
             <td>{((1 - item.cost/item.price)*100).toFixed(1)}%</td>
             <td>{item.sku}</td>
-            <td><button>Edit/Delete</button></td>
+            <td><Link to='/items/itemform'><button onClick={() => setActiveItem(item)}>Edit/Delete</button></Link></td>
         </>
     )
 }

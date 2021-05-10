@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import InventoryItem from '../InventoryItem/InventoryItem';
 
-export default function Inventroy({ allItems }) {
+export default function Inventroy({ allItems, setActiveItem }) {
 
     return (
     <div>
@@ -19,7 +19,7 @@ export default function Inventroy({ allItems }) {
             </thead>
             <tbody>
                 {allItems.map((item, idx) => 
-                <tr><InventoryItem item={item} key={idx}/></tr>)}
+                <tr><InventoryItem item={item} key={idx} setActiveItem={setActiveItem} /></tr>)}
             </tbody>
         </table>
         <Link to='/items/itemform'><button>Add Item</button></Link>

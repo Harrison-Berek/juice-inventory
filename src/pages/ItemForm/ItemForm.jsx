@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 import * as itemsAPI from '../../utilities/items-api';
 
  
-export  default function ItemForm({ allItems, setAllItems }) {
+export  default function ItemForm({ allItems, setAllItems, activeItem }) {
+    console.log(activeItem);
 
     const history = useHistory();
 
