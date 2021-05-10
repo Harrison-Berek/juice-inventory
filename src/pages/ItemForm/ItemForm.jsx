@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import * as itemsAPI from '../../utilities/items-api';
 
  
 export  default function ItemForm({ allItems, setAllItems }) {
+
+    const history = useHistory();
+
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -14,17 +18,16 @@ export  default function ItemForm({ allItems, setAllItems }) {
     async function addItem(itemData){
         const item = await itemsAPI.add(itemData);
         setAllItems([...allItems, item]);
+        history.push('/items');
     }
 
     function handleChange(evt) {
     const newFormData = { ...formData, [evt.target.name]: evt.target.value };
-    console.log(newFormData);
     setFormData(newFormData);
     }
     
     function handleAddItem(evt) {
     evt.preventDefault();
-    console.log(formData);
     addItem(formData);
     setFormData({
         name: '',
