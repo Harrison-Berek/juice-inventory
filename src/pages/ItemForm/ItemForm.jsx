@@ -31,6 +31,12 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
         history.push('/items');
     }
 
+    async function deleteItem(deletedItem) {
+        const item = await itemsAPI.deleteItem(deletedItem);
+        setActiveItem(null);
+        history.push('/items');
+    }
+
     
     function handleChange(evt) {
         if (activeItem) {
@@ -61,12 +67,11 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
     function handleUpdateItem(evt) {
         evt.preventDefault();
         updateItem(activeItem);
-        console.log('clicked');
-        console.log(activeItem);
     }
 
     function handleDeleteItem(evt) {
         evt.preventDefault();
+        deleteItem(activeItem);
         console.log('clicked');
     }
 
@@ -92,6 +97,8 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
                         <span></span>}
                 <label>SKU:</label>
                 <input name='sku' value={activeItem ? `${activeItem.sku}` : `${formData.sku}`} onChange={handleChange}  />
+                <div></div>
+                <div>
                 {activeItem ?
                     <button onClick={handleUpdateItem}>Edit</button>
                     :
@@ -100,6 +107,7 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
                     <button onClick={handleDeleteItem}>Delete</button>
                     :
                     <></>}
+                    </div>
             </form>
         </>
     )

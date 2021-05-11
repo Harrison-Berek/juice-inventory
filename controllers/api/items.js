@@ -3,7 +3,8 @@ const Item = require('../../models/item');
 module.exports = {
   index,
   create, 
-  update
+  update,
+  delete: deleteItem
 };
 
 async function index(req, res) {
@@ -18,7 +19,13 @@ async function create(req, res) {
 
 async function update(req,res) {
   const item = await Item.findByIdAndUpdate(req.params.id, req.body, {new: true})
-  console.log(item);
   res.json(item);
 }
+
+async function deleteItem(req, res) {
+  const item = await Item.findByIdAndDelete(req.params.id)
+  res.json(item);
+}
+
+
 

@@ -8,5 +8,7 @@ router.get('/', itemsCtrl.index);
 router.post('/', itemsCtrl.create);
 // PUT /api/items
 router.put('/:id', itemsCtrl.update);
+// DELETE /api/items
+router.delete('/:id', itemsCtrl.delete);
 
 module.exports = router;

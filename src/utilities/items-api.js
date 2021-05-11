@@ -17,3 +17,7 @@ export function add(item) {
 export function update(item) {
     return sendRequest(`${BASE_URL}/${item._id}`, 'PUT', item );
 }
+
+export function deleteItem(item) {
+    return sendRequest(`${BASE_URL}/${item._id}`, 'DELETE', item );
+}
