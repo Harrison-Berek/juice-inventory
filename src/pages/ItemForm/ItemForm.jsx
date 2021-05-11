@@ -26,6 +26,7 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
     async function addItem(itemData) {
         const item = await itemsAPI.add(itemData);
         setAllItems([...allItems, item]);
+        setActiveItem(item)
         history.push('/items');
     }
 
