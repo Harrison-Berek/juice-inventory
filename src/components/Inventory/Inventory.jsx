@@ -10,6 +10,7 @@ export default function Inventroy({ allItems, setActiveItem }) {
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th>Qty</th>
                     <th>Price</th>
                     <th>Cost</th>
                     <th>Margin</th>

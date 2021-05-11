@@ -2,8 +2,8 @@ const Item = require('../../models/item');
 
 module.exports = {
   index,
-  show,
-  create
+  create, 
+  update
 };
 
 async function index(req, res) {
@@ -11,12 +11,16 @@ async function index(req, res) {
   res.json(items);
 }
 
-async function show(req, res) {
-  const item = await Item.findById(req.params.id);
-  res.json(item);
-}
-
 async function create(req, res) {
   const item = await Item.create(req.body);
   res.json(item);
 }
+
+async function update(req,res) {
+  console.log(req.body);
+  console.log(req.params.id);
+  const item = await Item.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  console.log(item);
+  res.json(item);
+}
+

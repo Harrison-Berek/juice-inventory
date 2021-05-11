@@ -22,7 +22,7 @@ export default function App() {
       setAllItems(items);
     };
     getItems();
-  }, []);
+  }, [activeItem]);
   
   return (
     <main className="App">

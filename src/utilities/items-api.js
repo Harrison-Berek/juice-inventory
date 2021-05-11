@@ -13,3 +13,7 @@ export function getById(id) {
 export function add(item) {
     return sendRequest(BASE_URL, 'POST', item);
 }
+
+export function update(item) {
+    return sendRequest(`${BASE_URL}/${item._id}`, 'PUT', item );
+}
