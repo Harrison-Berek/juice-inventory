@@ -17,8 +17,6 @@ async function create(req, res) {
 }
 
 async function update(req,res) {
-  console.log(req.body);
-  console.log(req.params.id);
   const item = await Item.findByIdAndUpdate(req.params.id, req.body, {new: true})
   console.log(item);
   res.json(item);
