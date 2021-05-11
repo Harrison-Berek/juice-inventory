@@ -8,12 +8,14 @@ module.exports = {
 };
 
 async function index(req, res) {
-  const items = await Item.find({});
+  const items = await Item.find({}).populate('category').exec();
   res.json(items);
 }
 
 async function create(req, res) {
-  const item = await Item.create(req.body);
+  console.log(req.body);
+  const created = await Item.create(req.body);
+  const item = await Item.findById(created._id).populate('category').exec();
   res.json(item);
 }
 

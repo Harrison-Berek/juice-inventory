@@ -1,21 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as itemsAPI from '../../utilities/items-api';
 
 
-export default function ItemForm({ allItems, setAllItems, activeItem, setActiveItem }) {
-    console.log(activeItem);
+export default function ItemForm({ allItems, setAllItems, activeItem, setActiveItem, allCategories }) {
 
     const history = useHistory();
 
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        qty:'',
+        qty: '',
+        category: '',
         price: '',
         cost: '',
         sku: '',
     });
+
+    useEffect(function() {
+        if(allCategories[0]) setFormData({...formData, category: allCategories[0]._id})
+    }, [allCategories])
 
 
 
@@ -58,6 +62,7 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
             name: '',
             description: '',
             qty:'',
+            category: allCategories[0]._id,
             price: '',
             cost: '',
             sku: '',
@@ -85,6 +90,11 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
                 <input name='description' value={activeItem ? `${activeItem.description}` : `${formData.description}`} onChange={handleChange} />
                 <label>Qty:</label>
                 <input name='qty' value={activeItem ? `${activeItem.qty}` : `${formData.qty}`} onChange={handleChange} />
+                <label>Category:</label>
+                <select name='category' onChange={handleChange}>
+                    {allCategories.map(cat =>
+                        <option value={cat._id}>{cat.name}</option>)}
+                </select>
                 <label>Cost:</label>
                 <input name='cost' value={activeItem ? `${activeItem.cost}` : `${formData.cost}`} onChange={handleChange} />
                 <label>Price:</label>

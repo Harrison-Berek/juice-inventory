@@ -11,7 +11,7 @@ const itemSchema = new Schema({
     cost: { type: Number, required: true, default: 0 },
     sku: String,
     qty: { type: Number, default: 0 },
-    // category: categotySchema,
+    category: {type: Schema.Types.ObjectId, ref: 'Category'},
     // vender: venderSchema
   }, {
     timestamps: true
