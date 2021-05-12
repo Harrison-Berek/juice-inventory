@@ -21,3 +21,7 @@ export function update(item) {
 export function deleteItem(item) {
     return sendRequest(`${BASE_URL}/${item._id}`, 'DELETE', item );
 }
+
+// export function sortItems(selectedSort) {
+//   return sendRequest(BASE_URL, 'POST', selectedSort)
+// }

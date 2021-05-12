@@ -16,28 +16,33 @@ export default function App() {
   const [allItems, setAllItems] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [activeItem, setActiveItem] = useState(null);
+  const [selectedSort, setSelectedSort] = useState('name')
+
+
+  console.log(selectedSort);
 
   useEffect(function() {
     async function getItems() {
       const items = await itemsAPI.getAll();
-      console.log(items);
+      items.sort((a,b) => (a[selectedSort] > b[selectedSort]) ? 1 : -1) 
       setAllItems(items);
     };
     getItems();
-
-  }, [activeItem]);
-
-useEffect(function (){
-  async function getCategories() {
-    const categories = await categoriesAPI.getAll();
-    console.log(categories);
-    setAllCategories(categories);
-  };
-  getCategories();
+    
+    
+  }, [activeItem, selectedSort]);
+  
+  useEffect(function (){
+    async function getCategories() {
+      const categories = await categoriesAPI.getAll();
+      setAllCategories(categories);
+    };
+    getCategories();
   }, []);
   
-  return (
-    <main className="App">
+
+return (
+  <main className="App">
       { 
       user ? 
         <>
@@ -47,10 +52,10 @@ useEffect(function (){
               <ItemForm allItems={allItems} setAllItems={setAllItems} activeItem={activeItem} setActiveItem={setActiveItem} allCategories={allCategories} />
             </Route>
             <Route path="/items">
-              <Items allItems={allItems} setActiveItem={setActiveItem} />
+              <Items allItems={allItems} setAllItems={setAllItems} setActiveItem={setActiveItem} selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
             </Route>
             <Route path="/categories">
-              <Categories />
+              <Categories allCategories={allCategories} />
             </Route>
             <Route path="/venders">
               <Venders />

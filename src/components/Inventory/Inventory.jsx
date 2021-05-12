@@ -1,18 +1,20 @@
 import { Link } from 'react-router-dom';
+import * as itemsAPI from '../../utilities/items-api';
 import InventoryItem from '../InventoryItem/InventoryItem';
 
-export default function Inventroy({ allItems, setActiveItem }) {
-
+export default function Inventroy({ allItems, setAllItems, setActiveItem, selectedSort, setSelectedSort }) {
+    
+    
     return (
     <div>
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th onClick={() => setSelectedSort('name')}>Name</th>
                     <th>Description</th>
-                    <th>Qty</th>
+                    <th onClick={() => setSelectedSort('qty')}>Qty</th>
                     <th>Category</th>
-                    <th>Price</th>
+                    <th onClick={() => setSelectedSort('price')}>Prices</th>
                     <th>Cost</th>
                     <th>Margin</th>
                     <th>SKU</th>
