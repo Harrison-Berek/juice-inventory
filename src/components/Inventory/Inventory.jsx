@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import * as itemsAPI from '../../utilities/items-api';
 import InventoryItem from '../InventoryItem/InventoryItem';
 
-export default function Inventroy({ allItems, setAllItems, setActiveItem, selectedSort, setSelectedSort }) {
+export default function Inventroy({ allItems, setActiveItem, setSelectedSort }) {
     
     
     return (
