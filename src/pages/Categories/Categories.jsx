@@ -9,7 +9,7 @@ const [activeCategory, setActiveCategory] = useState('Wine')
       <h1>Categories</h1>
       {allCategories.map((cat, idx) => 
         <button onClick={() => setActiveCategory(cat.name)}>{cat.name}</button>)}
-      <div>
+      <div className='flex-ctr-ctr'>
         <table>
             <thead>
                 <tr>

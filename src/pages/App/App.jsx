@@ -18,9 +18,6 @@ export default function App() {
   const [activeItem, setActiveItem] = useState(null);
   const [selectedSort, setSelectedSort] = useState('name')
 
-
-  console.log(selectedSort);
-
   useEffect(function() {
     async function getItems() {
       const items = await itemsAPI.getAll();

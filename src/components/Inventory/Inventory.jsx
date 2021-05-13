@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-import * as itemsAPI from '../../utilities/items-api';
 import InventoryItem from '../InventoryItem/InventoryItem';
 
 export default function Inventroy({ allItems, setActiveItem, setSelectedSort }) {
     
-    
     return (
-    <div>
+    <div> 
+    <div className='flex-ctr-ctr'>
         <table>
             <thead>
                 <tr>
@@ -26,6 +25,7 @@ export default function Inventroy({ allItems, setActiveItem, setSelectedSort }) 
                 <tr><InventoryItem item={item} key={idx} setActiveItem={setActiveItem} /></tr>)}
             </tbody>
         </table>
+    </div>
         <Link to='/items/itemform'><button onClick={() => setActiveItem(null)}>Add Item</button></Link>
     </div>
     )

@@ -6,7 +6,6 @@ import * as itemsAPI from '../../utilities/items-api';
 export default function ItemForm({ allItems, setAllItems, activeItem, setActiveItem, allCategories }) {
 
     const history = useHistory();
-
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -25,9 +24,9 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
     function handleChange(evt) {
         if (activeItem) {
             const updatedItem = { ...activeItem, [evt.target.name]: evt.target.value }
-            if(updatedItem.price) updatedItem.price = parseInt(updatedItem.price);
-            if(updatedItem.cost) updatedItem.cost = parseInt(updatedItem.cost);
-            if(updatedItem.qty) updatedItem.qty = parseInt(updatedItem.qty);
+            if(updatedItem.price) updatedItem.price = parseFloat(updatedItem.price);
+            if(updatedItem.cost) updatedItem.cost = parseFloat(updatedItem.cost);
+            if(updatedItem.qty) updatedItem.qty = parseFloat(updatedItem.qty);
             setActiveItem(updatedItem);
         } else {
             const newFormData = { ...formData, [evt.target.name]: evt.target.value };
@@ -62,13 +61,13 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
     
     async function handleDeleteItem(evt) {
         evt.preventDefault();
-        const item = await itemsAPI.deleteItem(activeItem);
+        await itemsAPI.deleteItem(activeItem);
         setActiveItem(null);
         history.push('/items');
     }
 
     return (
-        <>
+        <div style={{margin: '8vmin'}}>
             <h1>{activeItem ? 'Edit Item' : 'Add an Item'}</h1>
             <form>
                 <label>Name:</label>
@@ -79,7 +78,7 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
                 <input name='qty' value={activeItem ? `${activeItem.qty}` : `${formData.qty}`} onChange={handleChange} />
                 <label>Category:</label>
                 <select name='category' onChange={handleChange}>
-                    {allCategories.map(cat =>
+                    {allCategories.map(cat => 
                         <option value={cat._id}>{cat.name}</option>)}
                 </select>
                 <label>Cost:</label>
@@ -106,6 +105,6 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
                     <></>}
                     </div>
             </form>
-        </>
+        </div>
     )
 }
