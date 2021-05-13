@@ -20,28 +20,7 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
     useEffect(function() {
         if(allCategories[0]) setFormData({...formData, category: allCategories[0]._id})
     }, [allCategories])
-
-
-
-    async function addItem(itemData) {
-        const item = await itemsAPI.add(itemData);
-        setAllItems([...allItems, item]);
-        setActiveItem(item)
-        history.push('/items');
-    }
-
-    async function updateItem(updatedItem) {
-        const item = await itemsAPI.update(updatedItem);
-        setActiveItem(item);
-        history.push('/items');
-    }
-
-    async function deleteItem(deletedItem) {
-        const item = await itemsAPI.deleteItem(deletedItem);
-        setActiveItem(null);
-        history.push('/items');
-    }
-
+    
     
     function handleChange(evt) {
         if (activeItem) {
@@ -55,10 +34,12 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
             setFormData(newFormData);
         }
     }
-
-    function handleAddItem(evt) {
+    
+    async function handleAddItem(evt) {
         evt.preventDefault();
-        addItem(formData);
+        const item = await itemsAPI.add(formData);
+        setAllItems([...allItems, item]);
+        setActiveItem(item)
         setFormData({
             name: '',
             description: '',
@@ -68,17 +49,22 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
             cost: '',
             sku: '',
         });
+        history.push('/items');
+    }
+    
+    async function handleUpdateItem(evt) {
+        evt.preventDefault();
+        const item = await itemsAPI.update(activeItem);
+        setActiveItem(item);
+        history.push('/items');
     }
 
-    function handleUpdateItem(evt) {
+    
+    async function handleDeleteItem(evt) {
         evt.preventDefault();
-        updateItem(activeItem);
-    }
-
-    function handleDeleteItem(evt) {
-        evt.preventDefault();
-        deleteItem(activeItem);
-        console.log('clicked');
+        const item = await itemsAPI.deleteItem(activeItem);
+        setActiveItem(null);
+        history.push('/items');
     }
 
     return (

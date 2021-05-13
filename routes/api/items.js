@@ -6,8 +6,6 @@ const itemsCtrl = require('../../controllers/api/items');
 router.get('/', itemsCtrl.index);
 // POST /api/items
 router.post('/', itemsCtrl.create);
-// // POST /api/items
-// router.post('/', itemsCtrl.sortItems);
 // PUT /api/items
 router.put('/:id', itemsCtrl.update);
 // DELETE /api/items

@@ -3,7 +3,6 @@ const Item = require('../../models/item');
 module.exports = {
   index,
   create, 
-  // sortItems,
   update,
   delete: deleteItem
 };
@@ -19,10 +18,6 @@ async function create(req, res) {
   const item = await Item.findById(created._id).populate('category').exec();
   res.json(item);
 }
-
-// async function sortItems(req, res){ 
-//   console.log(req.body);
-// }
 
 async function update(req,res) {
   const item = await Item.findByIdAndUpdate(req.params.id, req.body, {new: true})
