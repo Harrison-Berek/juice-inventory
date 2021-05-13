@@ -1,0 +1,9 @@
+.NavBarLink {
+    text-decoration: none;
+    color: white;
+}
+
+.NavBarLink:hover {
+    cursor: pointer;
+    color: purple;
+}

@@ -1,3 +1,3 @@
 export default function Venders() {
-    return <div>Venders</div>
+    return <h1>Venders</h1>
 }
