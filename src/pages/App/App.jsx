@@ -55,7 +55,7 @@ return (
               <Items allItems={allItems} setAllItems={setAllItems} setActiveItem={setActiveItem} selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
             </Route>
             <Route path="/categories">
-              <Categories allCategories={allCategories} />
+              <Categories allItems={allItems} allCategories={allCategories} setActiveItem={setActiveItem} />
             </Route>
             <Route path="/venders">
               <Venders />
