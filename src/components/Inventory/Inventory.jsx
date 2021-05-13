@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import InventoryItem from '../InventoryItem/InventoryItem';
 
-export default function Inventroy({ allItems, setActiveItem, setSelectedSort }) {
+export default function Inventroy({ allItems, setActiveItem, selectedSort, setSelectedSort }) {
     
     return (
     <div> 
@@ -9,11 +9,11 @@ export default function Inventroy({ allItems, setActiveItem, setSelectedSort }) 
         <table>
             <thead>
                 <tr>
-                    <th onClick={() => setSelectedSort('name')}>Name</th>
+                    <th onClick={() => setSelectedSort('name')} style={{textDecoration: selectedSort === 'name' && 'underline'}}>Name</th>
                     <th>Description</th>
-                    <th onClick={() => setSelectedSort('qty')}>Qty</th>
+                    <th onClick={() => setSelectedSort('qty')}style={{textDecoration: selectedSort === 'qty' && 'underline'}}>Qty</th>
                     <th>Category</th>
-                    <th onClick={() => setSelectedSort('price')}>Prices</th>
+                    <th onClick={() => setSelectedSort('price')} style={{textDecoration: selectedSort === 'price' && 'underline'}}>Prices</th>
                     <th>Cost</th>
                     <th>Margin</th>
                     <th>SKU</th>

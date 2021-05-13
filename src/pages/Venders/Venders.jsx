@@ -1,3 +1,9 @@
 export default function Venders() {
-    return <h1>Venders</h1>
+    return (
+    <div>
+        <h1>Venders</h1>
+        <br /><br /><br />
+        <h4>This Feature will be availble soon</h4>
+    </div>
+    )
 }

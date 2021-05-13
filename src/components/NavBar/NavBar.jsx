@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as userService from '../../utilities/users-service';
 import './NavBar.css';
 
 export default function NavBar({ user, setUser }) {
   const [activeLink, setActiveLink] = useState('')
-
 
   function handleLogOut() {
     userService.logOut();

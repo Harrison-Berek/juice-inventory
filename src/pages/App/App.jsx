@@ -49,7 +49,7 @@ return (
               <ItemForm allItems={allItems} setAllItems={setAllItems} activeItem={activeItem} setActiveItem={setActiveItem} allCategories={allCategories} />
             </Route>
             <Route path="/items">
-              <Items allItems={allItems} setActiveItem={setActiveItem} setSelectedSort={setSelectedSort} />
+              <Items allItems={allItems} setActiveItem={setActiveItem} selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
             </Route>
             <Route path="/categories">
               <Categories allItems={allItems} allCategories={allCategories} setActiveItem={setActiveItem} />
