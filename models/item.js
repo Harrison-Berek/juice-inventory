@@ -11,6 +11,8 @@ const itemSchema = new Schema({
     cost: { type: Number, required: true, default: 0 },
     sku: String,
     qty: { type: Number, default: 0 },
+    AWSKey: String,
+    imageURL: {type: String, default: 'https://s.leesliquorlv.com/wp-content/uploads/2020/04/default-product-image-1-600x600.gif'},
     category: {type: Schema.Types.ObjectId, ref: 'Category'},
     // vender: venderSchema
   }, {

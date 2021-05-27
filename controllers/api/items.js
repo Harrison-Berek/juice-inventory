@@ -1,4 +1,15 @@
 const Item = require('../../models/item');
+const uuid = require('uuid');
+const {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+  GetObjectCommand,
+} = require("@aws-sdk/client-s3");
+const BASE_URL = process.env.S3_BASE_URL;
+const BUCKET = process.env.S3_BUCKET;
+const REGION = process.env.REGION;
+
 
 module.exports = {
   index,
@@ -13,8 +24,13 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  console.log(req.body);
-  const created = await Item.create(req.body);
+  console.log('Here', req.file);
+  const AWSData = await getNewImageUrl(req.file, false);
+  const created = await Item.create({
+    ...req.body,
+    AWSKey: AWSData.key,
+    sourceURL: AWSData.url
+  });
   const item = await Item.findById(created._id).populate('category').exec();
   res.json(item);
 }
@@ -29,5 +45,29 @@ async function deleteItem(req, res) {
   res.json(item);
 }
 
+// Helper Functions
 
-
+async function getNewImageUrl(photo, edit, key) {
+  console.log(photo);
+  const hex = uuid.v4().slice(uuid.v4().length-6);
+  const fileExtension = photo.mimetype.match(/[/](.*)/)[1].replace('', '.');
+  const uploadParams = {
+    Bucket: process.env.S3_BUCKET,
+    Key: generateAWSKey(photo),
+    Body: photo.buffer
+  }
+  const s3 = new S3Client({ region: REGION });
+  const run = async () => {
+    try {
+      const data = await s3.send(new PutObjectCommand(uploadParams));
+      console.log("Success", data);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+  run();
+  return {
+    url: `${BASE_URL}${BUCKET}/${uploadParams.Key}`,
+    key: uploadParams.key,
+  }
+}

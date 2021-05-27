@@ -10,6 +10,7 @@ export default function Inventroy({ allItems, setActiveItem, selectedSort, setSe
             <thead>
                 <tr>
                     <th onClick={() => setSelectedSort('name')} style={{textDecoration: selectedSort === 'name' && 'underline'}}>Name</th>
+                    <th>Image</th>
                     <th>Description</th>
                     <th onClick={() => setSelectedSort('qty')}style={{textDecoration: selectedSort === 'qty' && 'underline'}}>Qty</th>
                     <th>Category</th>

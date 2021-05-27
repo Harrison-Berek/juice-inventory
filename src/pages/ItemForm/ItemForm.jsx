@@ -6,7 +6,7 @@ import * as itemsAPI from '../../utilities/items-api';
 export default function ItemForm({ allItems, setAllItems, activeItem, setActiveItem, allCategories }) {
 
     const history = useHistory();
-    const [formData, setFormData] = useState({
+    const [formInfo, setFormInfo] = useState({
         name: '',
         description: '',
         qty: '',
@@ -17,7 +17,7 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
     });
 
     useEffect(function() {
-        if(allCategories[0]) setFormData({...formData, category: allCategories[0]._id})
+        if(allCategories[0]) setFormInfo({...formInfo, category: allCategories[0]._id})
     }, [allCategories])
     
     
@@ -29,17 +29,28 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
             if(updatedItem.qty) updatedItem.qty = parseFloat(updatedItem.qty);
             setActiveItem(updatedItem);
         } else {
-            const newFormData = { ...formData, [evt.target.name]: evt.target.value };
-            setFormData(newFormData);
+            const newFormData = { ...formInfo, [evt.target.name]: evt.target.value };
+            setFormInfo(newFormData);
         }
     }
     
     async function handleAddItem(evt) {
         evt.preventDefault();
+        const formData = new FormData();
+        const fileField = document.querySelector('input[type="file"]');
+        formData.append('name', formInfo.name);
+        formData.append('discription', formInfo.discription);
+        formData.append('qty', formInfo.qty);
+        formData.append('category', formInfo.category);
+        formData.append('price', formInfo.price);
+        formData.append('cost', formInfo.cost);
+        formData.append('sku', formInfo.sku);
+        fileField.files.length && formData.append('image', fileField.files[0])
+        console.log('formData', formData);
         const item = await itemsAPI.add(formData);
         setAllItems([...allItems, item]);
         setActiveItem(item)
-        setFormData({
+        setFormInfo({
             name: '',
             description: '',
             qty:'',
@@ -71,28 +82,30 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
             <h1>{activeItem ? 'Edit Item' : 'Add an Item'}</h1>
             <form>
                 <label>Name:</label>
-                <input name='name' value={activeItem ? `${activeItem.name}` : `${formData.name}`} onChange={handleChange} />
+                <input name='name' value={activeItem ? `${activeItem.name}` : `${formInfo.name}`} onChange={handleChange} />
                 <label>Description:</label>
-                <input name='description' value={activeItem ? `${activeItem.description}` : `${formData.description}`} onChange={handleChange} />
+                <input name='description' value={activeItem ? `${activeItem.description}` : `${formInfo.description}`} onChange={handleChange} />
                 <label>Qty:</label>
-                <input name='qty' value={activeItem ? `${activeItem.qty}` : `${formData.qty}`} onChange={handleChange} />
+                <input name='qty' value={activeItem ? `${activeItem.qty}` : `${formInfo.qty}`} onChange={handleChange} />
                 <label>Category:</label>
                 <select name='category' onChange={handleChange}>
                     {allCategories.map(cat => 
                         <option value={cat._id}>{cat.name}</option>)}
                 </select>
                 <label>Cost:</label>
-                <input name='cost' value={activeItem ? `${activeItem.cost}` : `${formData.cost}`} onChange={handleChange} />
+                <input name='cost' value={activeItem ? `${activeItem.cost}` : `${formInfo.cost}`} onChange={handleChange} />
                 <label>Price:</label>
-                <input name='price' value={activeItem ? `${activeItem.price}` : `${formData.price}`} onChange={handleChange} />
+                <input name='price' value={activeItem ? `${activeItem.price}` : `${formInfo.price}`} onChange={handleChange} />
                 <label>Margin:</label>
                 {activeItem ? <span>{((1 - activeItem.cost / activeItem.price) * 100).toFixed(1)}% </span>
                     :
-                    formData.price ? <span>{((1 - formData.cost / formData.price) * 100).toFixed(1)}% </span>
+                    formInfo.price ? <span>{((1 - formInfo.cost / formInfo.price) * 100).toFixed(1)}% </span>
                         :
                         <span></span>}
                 <label>SKU:</label>
-                <input name='sku' value={activeItem ? `${activeItem.sku}` : `${formData.sku}`} onChange={handleChange}  />
+                <input name='sku' value={activeItem ? `${activeItem.sku}` : `${formInfo.sku}`} onChange={handleChange}  />
+                <label>Image:</label>
+                <input type='file' name='imageURL'/>
                 <div></div>
                 <div>
                 {activeItem ?

@@ -11,7 +11,7 @@ export function getById(id) {
 }
 
 export function add(item) {
-    return sendRequest(BASE_URL, 'POST', item);
+    return sendRequest(BASE_URL, 'POST', item, true);
 }
 
 export function update(item) {
