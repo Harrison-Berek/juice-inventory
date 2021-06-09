@@ -25,11 +25,11 @@ async function index(req, res) {
 
 async function create(req, res) {
   console.log('Here', req.file);
-  const AWSData = await getNewImageUrl(req.file, false);
+  const AWSData = await getNewImageUrl(req.file);
   const created = await Item.create({
     ...req.body,
     AWSKey: AWSData.key,
-    sourceURL: AWSData.url
+    imageURL: AWSData.url
   });
   const item = await Item.findById(created._id).populate('category').exec();
   res.json(item);
@@ -47,15 +47,15 @@ async function deleteItem(req, res) {
 
 // Helper Functions
 
-async function getNewImageUrl(photo, edit, key) {
-  console.log(photo);
+async function getNewImageUrl(image, edit, key) {
   const hex = uuid.v4().slice(uuid.v4().length-6);
-  const fileExtension = photo.mimetype.match(/[/](.*)/)[1].replace('', '.');
+  const fileExtension = image.mimetype.match(/[/](.*)/)[1].replace('', '.');
   const uploadParams = {
-    Bucket: process.env.S3_BUCKET,
-    Key: generateAWSKey(photo),
-    Body: photo.buffer
+    Bucket: BUCKET,
+    Key: hex + fileExtension,
+    Body: image.buffer
   }
+  console.log("YOLO")
   const s3 = new S3Client({ region: REGION });
   const run = async () => {
     try {

@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import InventoryItem from '../InventoryItem/InventoryItem';
+import './Inventory.css';
 
 export default function Inventroy({ allItems, setActiveItem, selectedSort, setSelectedSort }) {
     
     return (
     <div> 
-    <div className='flex-ctr-ctr'>
+    <div className='flex-ctr-ctr items-table'>
         <table>
             <thead>
                 <tr>

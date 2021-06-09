@@ -22,6 +22,8 @@ app.use(require('./config/checkToken'));
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
 
+console.log("Server")
+
 app.use('/api/items', upload.single('image'), require('./routes/api/items'));
 app.use('/api/categories', require('./routes/api/categories'));
 

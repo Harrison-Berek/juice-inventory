@@ -39,14 +39,14 @@ export default function ItemForm({ allItems, setAllItems, activeItem, setActiveI
         const formData = new FormData();
         const fileField = document.querySelector('input[type="file"]');
         formData.append('name', formInfo.name);
-        formData.append('discription', formInfo.discription);
+        formData.append('description', formInfo.description);
         formData.append('qty', formInfo.qty);
         formData.append('category', formInfo.category);
-        formData.append('price', formInfo.price);
         formData.append('cost', formInfo.cost);
+        formData.append('price', formInfo.price);
         formData.append('sku', formInfo.sku);
         fileField.files.length && formData.append('image', fileField.files[0])
-        console.log('formData', formData);
+        formData.forEach(ele => console.log(ele))
         const item = await itemsAPI.add(formData);
         setAllItems([...allItems, item]);
         setActiveItem(item)

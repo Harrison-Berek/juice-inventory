@@ -6,7 +6,7 @@ export default async function sendRequest(url, method = 'GET', payload = null, p
   const options = { method };
   if (payload) {
     options.headers = payloadIsFormData ? {} : { 'Content-Type': 'application/json' };
-    options.body = JSON.stringify(payload);
+    options.body = payloadIsFormData ? payload : JSON.stringify(payload);
   }
   const token = getToken();
   if (token) {
@@ -16,6 +16,7 @@ export default async function sendRequest(url, method = 'GET', payload = null, p
     // Prefacing with 'Bearer' is recommended in the HTTP specification
     options.headers.Authorization = `Bearer ${token}`;
   }
+  console.log('Hello');
   const res = await fetch(url, options);
   // res.ok will be false if the status code set to 4xx in the controller action
   if (res.ok) return res.json();
