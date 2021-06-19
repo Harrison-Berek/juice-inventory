@@ -16,7 +16,7 @@ export default function NavBar({ user, setUser }) {
       <div>
         <img src="https://i.imgur.com/coiP9i5.png" alt="logo" style={{width: '10rem'}} />
       </div>
-      <span>Welcome, {user.name}</span>
+      <span>Welcome, {user.name}!</span>
       &nbsp; | &nbsp;
       <Link to="/items" className='NavBarLink' onClick={() => setActiveLink('items')} style={{color: activeLink === 'items' && 'purple'}} >Items</Link>
       &nbsp; | &nbsp;
